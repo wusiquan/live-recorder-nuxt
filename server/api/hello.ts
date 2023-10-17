@@ -1,7 +1,7 @@
-import { getRoomInfo } from '../provider/douyin'
+// import { getRoomInfo } from '../provider/douyin'
 
 export default defineEventHandler(async (event) => {
-  await getRoomInfo()
+  // await getRoomInfo()
 
   return {
     hello: 'world'

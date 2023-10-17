@@ -1,14 +1,11 @@
-// douyin  bililive
-// have two ways
-// 1. now way  2. legacy way
+const runtimeConfig = useRuntimeConfig()
 
-const userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
-
-const baseURL = 'https://live.douyin.com'
+const userAgent = runtimeConfig.userAgent
+const { baseURL } = runtimeConfig.douyin
 
 // const ROOMINFO_API = "https://live.douyin.com/webcast/room/web/enter/?aid=6383&app_name=douyin_web&live_id=1&device_platform=web&language=zh-CN&browser_language=zh-CN&browser_platform=Win32&browser_name=Chrome&browser_version=116.0.0.0&web_rid=%s"
 
-const reg = /self\.__pace_f\.push\(\[1,"a:(\[.*\])\\n"\]\)/
+const mainInfoReg = /self\.__pace_f\.push\(\[1,"a:(\[.*\])\\n"\]\)/
 
 // gen random string of 21 length 
 function randNonceValue() {
@@ -24,6 +21,7 @@ function randNonceValue() {
   return nonce
 }
 
+// normal way -- crawl server data on live page
 async function getRoomInfoFromLivePage(liveId: string) {
   const cookieStr = objToCookieStr({
     "Cache-Control": "no-cache",
@@ -34,6 +32,7 @@ async function getRoomInfoFromLivePage(liveId: string) {
     baseURL,
 
     headers: {
+      'User-Agent': userAgent,
       Cookie: cookieStr
     },
 
@@ -42,7 +41,7 @@ async function getRoomInfoFromLivePage(liveId: string) {
     // }
   })
 
-  const matched = pageHtml.match(reg)
+  const matched = pageHtml.match(mainInfoReg)
   const info = matched?.[1]
   if (info) {
     const infoObj = JSON.parse('"' + info + '"')
@@ -51,8 +50,9 @@ async function getRoomInfoFromLivePage(liveId: string) {
   }
 }
 
-async function getRoomInfoFromApi(liveId) {
-
+// fallback way -- call live room api
+async function getRoomInfoFromApi(liveId: string) {
+  
 }
 
 export {
