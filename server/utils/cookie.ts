@@ -1,5 +1,4 @@
-
-export function objToCookieStr(obj: any) {
+export function objToCookieStr(obj: Record<string, string>) {
   obj = obj || {}
 
   let cookieStr = ''
@@ -12,4 +11,3 @@ export function objToCookieStr(obj: any) {
 
   return cookieStr
 }
-
