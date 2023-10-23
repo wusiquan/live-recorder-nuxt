@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  // devtools: { enabled: true },
+  devtools: { enabled: false },
 
   runtimeConfig: {
     common: {
@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     douyin: {
       baseURL: 'https://live.douyin.com',
     },
+
+    bilibili: {
+      baseURL: 'https://api.live.bilibili.com',
+    },
+
+    // liveStream: {
+    //   quality: 0
+    // }
   },
 
   vite: {

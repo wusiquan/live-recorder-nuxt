@@ -24,7 +24,7 @@ function randNonceValue() {
 // normal way -- crawl server data on live page
 async function getRoomInfoFromLivePage(liveId: string) {
   const cookieStr = objToCookieStr({
-    "Cache-Control": "no-cache",
+    'Cache-Control': 'no-cache',
     '__ac_nonce': randNonceValue(),
   })
 
@@ -39,6 +39,8 @@ async function getRoomInfoFromLivePage(liveId: string) {
     // onResponse({ response }) {
     //   console.log(11, response.headers)
     // }
+  }).catch(() => {
+    
   })
 
   const matched = pageHtml.match(mainInfoReg)
