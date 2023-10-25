@@ -32,6 +32,8 @@ async function getRoomInfo(roomId: string) {
   // } else {
   // streamAddr = roomInfo.playurl_info.playurl.stream[0].format[0].codec[0]
   // }
+
+  console.log('哈哈', streamAddr)
 }
 
 export {

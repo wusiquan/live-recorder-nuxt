@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   runtimeConfig: {
+    redis: {
+      host: '10.115.89.6',
+      port: 6379
+    },
+
     common: {
       userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
     },
