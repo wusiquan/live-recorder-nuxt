@@ -8,8 +8,9 @@ export default defineNuxtConfig({
       port: 6379
     },
 
+    // 公共
     common: {
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+      userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
     },
 
     // 抖音
@@ -20,12 +21,16 @@ export default defineNuxtConfig({
     // b站
     bilibili: {
       baseURL: 'https://api.live.bilibili.com',
+      headers: {
+        origin: 'https://live.bilibili.com',
+        referer: 'https://live.bilibili.com/'
+      }
     },
 
     // 企鹅体育
-    qq: {
-      baseURL: 'https://live.qq.com'
-    }
+    // qq: {
+    //   baseURL: 'https://live.qq.com'
+    // }
 
     // liveStream: {
     //   quality: 0
