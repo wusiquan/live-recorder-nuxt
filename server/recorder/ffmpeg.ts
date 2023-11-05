@@ -1,3 +1,82 @@
 import childProcess from 'node:child_process'
+import process from 'node:process'
+import fs from 'node:fs'
+import path from 'node:path'
+import { getFfmpegPath } from '../utils/getFfmpegPath'
+// import { fileURLToPath } from "node:url"
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = dirname(__filename)
 
-// let node12File = childProcess.exec(`ffmepg`)
+const runtimeConfig = useRuntimeConfig()
+
+const { userAgent } = runtimeConfig.common
+const { origin, referer } = runtimeConfig.bilibili.headers
+
+function record(stremUrl: string) {
+  const ffmpegPath = getFfmpegPath()
+
+  const crlf = "'\r\n'"
+  const headers = [
+    `User-Agent: ${userAgent}`,
+    `Origin: ${origin}`,
+    `Referer: ${referer}`,
+  ].join(crlf) + crlf
+
+  const commandAgs = [
+    '-headers', headers,
+    '-i', stremUrl,
+    '-c', 'copy',
+    '-bsf:a', 'aac_adtstoasc',
+    'public/xiabingbao20231105.flv'
+  ]
+
+  const cwd = process.cwd()
+
+  const ffmpegProc = childProcess.spawn(ffmpegPath, commandAgs, {
+    cwd
+  })
+
+  // ffmpegProc.stderr.setEncoding('utf8')
+  // ffmpegProc.stderr.on('data', (data) => {
+  //   console.log(data)
+  // })
+
+  ffmpegProc.on('error', (err) => {
+    console.log('错误', err)
+  })
+
+  ffmpegProc.on('exit', (code, signal) => {
+    console.log('exit执行', code, signal)
+
+    if (!code || signal == 'SIGKILL') {
+      const file = 'public/xiabingbao20231105'
+      const filePath = path.resolve(cwd, file) 
+      console.log('执行了没有', filePath)
+      // 此时转mp4
+      if (fs.statSync(filePath + '.flv')) {
+        const commandStr = [
+          `ffmpeg`,
+          // 省略文件有关ffmpeg本身的信息
+          '-hide_banner',
+          `-i ${filePath}.flv`,
+          '-c copy',
+          `${file}.mp4`
+        ].join(' ')
+  
+        childProcess.exec(commandStr)
+      }
+    }
+  })
+
+  setTimeout(() => {
+    console.log(1111, '5秒了')
+    const r = ffmpegProc.stdin?.write('q')
+    if (!r) {
+      ffmpegProc.kill('SIGKILL')
+    }
+  }, 5000)  
+}
+
+export {
+  record
+}
