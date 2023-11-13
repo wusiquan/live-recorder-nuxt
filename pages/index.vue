@@ -1,12 +1,12 @@
 <template>
   <NSpace vertical :size="12">
-    <nDataTable size="large" :columns="columns" :data="data" :pagination="pagination" />
+    <NDataTable size="large" :columns="columns" :data="data" :pagination="pagination" />
   </NSpace>
 </template>
 
 <script lang="ts" setup>
 import { h } from 'vue'
-import { NSpace, NDataTable, NTag, NButton, useMessage } from 'naive-ui'
+import { NSpace, NDataTable, NTag, NButton } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
 type RowData = {

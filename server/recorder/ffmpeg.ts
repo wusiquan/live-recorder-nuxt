@@ -40,41 +40,45 @@ function record(stremUrl: string) {
   // ffmpegProc.stderr.on('data', (data) => {
   //   console.log(data)
   // })
+  ffmpegProc.stdout.on('data', (data) => {
+    console.log('data', data.toString("utf8"))
+  })
 
   ffmpegProc.on('error', (err) => {
     console.log('错误', err)
   })
 
   ffmpegProc.on('exit', (code, signal) => {
-    console.log('exit执行', code, signal)
-
-    if (!code || signal == 'SIGKILL') {
-      const file = 'public/xiabingbao20231105'
-      const filePath = path.resolve(cwd, file) 
-      console.log('执行了没有', filePath)
-      // 此时转mp4
-      if (fs.statSync(filePath + '.flv')) {
-        const commandStr = [
-          `ffmpeg`,
-          // 省略文件有关ffmpeg本身的信息
-          '-hide_banner',
-          `-i ${filePath}.flv`,
-          '-c copy',
-          `${file}.mp4`
-        ].join(' ')
-  
-        childProcess.exec(commandStr)
-      }
-    }
+    console.log('exit执行', `退出码: ${code}`, `信号: ${signal}`)
   })
 
-  setTimeout(() => {
-    console.log(1111, '5秒了')
-    const r = ffmpegProc.stdin?.write('q')
-    if (!r) {
-      ffmpegProc.kill('SIGKILL')
-    }
-  }, 5000)  
+  //   if (signal == 'SIGKILL') {
+  //     const file = 'public/xiabingbao20231105'
+  //     const filePath = path.resolve(cwd, file) 
+  //     console.log('执行了没有', filePath)
+  //     // 此时转mp4
+  //     if (fs.statSync(filePath + '.flv')) {
+  //       const commandStr = [
+  //         `ffmpeg`,
+  //         // 省略文件有关ffmpeg本身的信息
+  //         '-hide_banner',
+  //         `-i ${filePath}.flv`,
+  //         '-c copy',
+  //         `${file}.mp4`
+  //       ].join(' ')
+  
+  //       childProcess.exec(commandStr)
+  //     }
+  //   }
+  // })
+
+  // setTimeout(() => {
+  //   console.log(1111, '5秒了')
+  //   const r = ffmpegProc.stdin?.write('q')
+  //   if (!r) {
+  //     ffmpegProc.kill('SIGKILL')
+  //   }
+  // }, 5000)  
 }
 
 export {
