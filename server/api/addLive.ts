@@ -5,7 +5,7 @@ import { record } from '../recorder/ffmpeg'
 // 如果 redis 队列有数据就定时, 没有就不定时
 export default defineEventHandler(async (event) => {
   let { liveId } = await readBody(event)
-
+  console.log(11, liveId);
   if (!liveId) {
     return {
       code: -1,
