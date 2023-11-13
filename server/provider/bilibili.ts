@@ -35,7 +35,7 @@ async function getRoomInfo(roomId: string) {
   // const format = roomInfo.playurl_info.playurl.stream[1].format
   
   // let codec: any[]
-  // // 2种格式 flv和hls(.m3u8) 
+  // // 2种格式 ts和fmp4
   // if (format.length > 1) {
   //   codec = format[1].codec
   // } else {
@@ -71,7 +71,7 @@ async function getRoomInfo(roomId: string) {
     "attr_name": ""
   }
 */
-  const streamInfo = roomInfo.playurl_info.playurl.stream[0].format[0].codec[0]
+  const streamInfo = roomInfo.playurl_info.playurl.stream[1].format[1].codec[0]
 
   // 可能有多个? 先取第一个吧
   const streamUrlInfoItem = streamInfo.url_info[0]
