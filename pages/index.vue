@@ -24,7 +24,7 @@ const createColumns = ({
 }): DataTableColumns<RowData> => {
   return [
     {
-      title: 'Name',
+      title: 'Name1',
       key: 'name'
     },
     {
