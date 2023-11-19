@@ -27,7 +27,7 @@ function record(stremUrl: string) {
     '-i', stremUrl,
     '-c', 'copy',
     '-bsf:a', 'aac_adtstoasc',
-    'public/xiabingbao20231105.flv'
+    'public/xiabingbao20231105.ts'
   ]
 
   const cwd = process.cwd()
