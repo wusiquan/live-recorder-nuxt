@@ -6,13 +6,13 @@
 <script lang="ts" setup>
 async function test() {
   console.log('调用?')
-  const r = await $fetch('/api/addLive', {
-    method: 'POST',
-    body: {
-      liveId: '670094'
-    }
-  })
+  // const r = await $fetch('/api/addLive', {
+  //   method: 'POST',
+  //   body: {
+  //     liveId: '670094'
+  //   }
+  // })
   console.log('前端结果')
-  console.log(r)
+  // console.log(r)
 }
 </script>
