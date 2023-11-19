@@ -5,6 +5,7 @@
 
 <script lang="ts" setup>
 async function test() {
+  console.log('调用?')
   const r = await $fetch('/api/addLive', {
     method: 'POST',
     body: {
