@@ -37,11 +37,14 @@ function record(stremUrl: string) {
   })
 
   // ffmpegProc.stderr.setEncoding('utf8')
-  // ffmpegProc.stderr.on('data', (data) => {
-  //   console.log(data)
-  // })
+
+
   ffmpegProc.stdout.on('data', (data) => {
-    console.log('data', data.toString("utf8"))
+    console.log('stdout data', data.toString("utf8"))
+  })
+
+  ffmpegProc.stderr.on('data', (data) => {
+    console.log('stderr', data.toString("utf8"))
   })
 
   ffmpegProc.on('error', (err) => {
