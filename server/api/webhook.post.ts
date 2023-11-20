@@ -7,8 +7,9 @@ const verifySignature = (body: any, signature256: string) => {
     .createHmac("sha256", WEBHOOK_SECRET)
     .update(JSON.stringify(body))
     .digest("hex");
+  console.log(222, `sha256=${signature}`, signature256)
   let trusted = Buffer.from(`sha256=${signature}`, 'ascii');
-  let untrusted =  Buffer.from(signature256, 'ascii');
+  let untrusted = Buffer.from(signature256, 'ascii');
   return crypto.timingSafeEqual(trusted, untrusted);
 };
 
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event) => {
   const headers = getRequestHeaders(event)
   const body = readBody(event)
   const signature256 = headers['x-hub-signature-256']
-
+  console.log(111, body, signature256)
   if (!signature256) {
     setResponseStatus(event, 401)
     send(event, 'Unauthorized')
@@ -28,5 +29,5 @@ export default defineEventHandler(async (event) => {
   setResponseStatus(event, 201)
   send(event, `haha ${result}`)
   
-  console.log(222)
+  console.log(333)
 })
