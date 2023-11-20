@@ -34,5 +34,6 @@ export default defineEventHandler(async (event) => {
     return send(event, 'Unauthorized')
   }
 
+  // spwan一个子进程进行git pull oriign 
   console.log(333)
 })
