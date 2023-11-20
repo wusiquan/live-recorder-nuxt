@@ -20,13 +20,19 @@ export default defineEventHandler(async (event) => {
   console.log(111, body, signature256)
   if (!signature256) {
     setResponseStatus(event, 401)
-    await send(event, 'Unauthorized')
-    return
+    return send(event, 'Unauthorized')
   }
   
   const result = verifySignature(body, signature256!)
 
-  setResponseStatus(event, 201)
-  await send(event, `haha ${result}`)
+  if (result) {
+    setResponseHeader(event, 'Access-Control-Allow-Origin', 'https://github.com/')
+    setResponseStatus(event, 201)
+    await send(event, `haha ${result}`)
+  } else {
+    setResponseStatus(event, 401)
+    return send(event, 'Unauthorized')
+  }
+
   console.log(333)
 })
