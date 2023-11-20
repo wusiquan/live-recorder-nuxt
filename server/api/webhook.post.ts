@@ -15,19 +15,18 @@ const verifySignature = (body: any, signature256: string) => {
 
 export default defineEventHandler(async (event) => {
   const headers = getRequestHeaders(event)
-  const body = readBody(event)
+  const body = await readBody(event)
   const signature256 = headers['x-hub-signature-256']
   console.log(111, body, signature256)
   if (!signature256) {
     setResponseStatus(event, 401)
-    send(event, 'Unauthorized')
+    await send(event, 'Unauthorized')
     return
   }
   
   const result = verifySignature(body, signature256!)
 
   setResponseStatus(event, 201)
-  send(event, `haha ${result}`)
-  
+  await send(event, `haha ${result}`)
   console.log(333)
 })
