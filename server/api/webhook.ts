@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
   const result = verifySignature(body, signature256!)
 
   setResponseStatus(event, 201)
-  event.node.res.end(`haha ${result}`)
+  send(event, `haha ${result}`)
   
   console.log(222)
 })
