@@ -20,7 +20,7 @@ function record(stremUrl: string) {
     `User-Agent: ${userAgent}`,
     `Origin: ${origin}`,
     `Referer: ${referer}`,
-  ].join(' ')
+  ].join('\n')
 
   const commandAgs = [
     '-headers', headers,
