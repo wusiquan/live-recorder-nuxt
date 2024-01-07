@@ -8,7 +8,7 @@ async function test() {
   const r = await $fetch('/api/addLive', {
     method: 'POST',
     body: {
-      liveId: '27268915'
+      liveId: '14650198'
     }
   })
   console.log('前端结果')
