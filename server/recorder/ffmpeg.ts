@@ -52,7 +52,11 @@ function record(stremUrl: string) {
   })
 
   ffmpegProc.on('exit', (code, signal) => {
-    console.log('exit执行', `退出码: ${code}`, `信号: ${signal}`)
+    console.log('ffmpeg exit执行', `退出码: ${code}`, `信号: ${signal}`)
+  })
+
+  process.on('exit', (code: any, signal: any) => {
+    console.log('process exit执行', `退出码: ${code}`, `信号: ${signal}`)
   })
 
   process.on('SIGINT', () => {
