@@ -15,12 +15,12 @@ const { origin, referer } = runtimeConfig.bilibili.headers
 function record(stremUrl: string) {
   const ffmpegPath = getFfmpegPath()
 
-  const crlf = "'\r\n'"
+  const crlf = "\r\n"
   const headers = [
     `User-Agent: ${userAgent}`,
-    `Origin: ${origin}`,
-    `Referer: ${referer}`,
-  ].join(crlf) + '$' + crlf
+    // `Origin: ${origin}`,
+    // `Referer: ${referer}`,
+  ] + crlf
 
   const commandAgs = [
     '-headers', headers,
