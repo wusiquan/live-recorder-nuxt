@@ -27,7 +27,7 @@ function record(stremUrl: string) {
     '-i', stremUrl,
     '-c', 'copy',
     '-bsf:a', 'aac_adtstoasc',
-    'public/xiabingbao20240107.ts'
+    'public/xiabingbao20240107.flv'
   ]
 
   const cwd = process.cwd()
@@ -56,7 +56,7 @@ function record(stremUrl: string) {
 
     if (signal == 'SIGKILL') {
       const file = 'public/xiabingbao20240107'
-      const filePath = path.resolve(cwd, file + '.ts') 
+      const filePath = path.resolve(cwd, file + '.flv') 
       console.log('执行了没有', filePath)
       // 此时转mp4
       if (fs.statSync(filePath)) {
