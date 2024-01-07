@@ -27,7 +27,7 @@ function record(stremUrl: string) {
     '-i', stremUrl,
     '-c', 'copy',
     '-bsf:a', 'aac_adtstoasc',
-    'public/xiabingbao20231105.ts'
+    'public/xiabingbao20240107.ts'
   ]
 
   const cwd = process.cwd()
@@ -53,26 +53,27 @@ function record(stremUrl: string) {
 
   ffmpegProc.on('exit', (code, signal) => {
     console.log('exit执行', `退出码: ${code}`, `信号: ${signal}`)
-  })
 
-  //   if (signal == 'SIGKILL') {
-  //     const file = 'public/xiabingbao20231105'
-  //     const filePath = path.resolve(cwd, file) 
-  //     console.log('执行了没有', filePath)
-  //     // 此时转mp4
-  //     if (fs.statSync(filePath + '.flv')) {
-  //       const commandStr = [
-  //         `ffmpeg`,
-  //         // 省略文件有关ffmpeg本身的信息
-  //         '-hide_banner',
-  //         `-i ${filePath}.flv`,
-  //         '-c copy',
-  //         `${file}.mp4`
-  //       ].join(' ')
+    if (signal == 'SIGKILL') {
+      const file = 'public/xiabingbao20240107.ts'
+      const filePath = path.resolve(cwd, file) 
+      console.log('执行了没有', filePath)
+      // 此时转mp4
+      if (fs.statSync(filePath)) {
+        const commandStr = [
+          `ffmpeg`,
+          // 省略文件有关ffmpeg本身的信息
+          '-hide_banner',
+          `-i ${filePath}.flv`,
+          '-c copy',
+          `${file}.mp4`
+        ].join(' ')
   
-  //       childProcess.exec(commandStr)
-  //     }
-  //   }
+        childProcess.exec(commandStr)
+      }
+    }
+  })
+    
   // })
 
   // setTimeout(() => {
