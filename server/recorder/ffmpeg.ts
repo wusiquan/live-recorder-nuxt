@@ -18,9 +18,9 @@ function record(stremUrl: string) {
   const crlf = "\r\n"
   const headers = [
     `User-Agent: ${userAgent}`,
-    // `Origin: ${origin}`,
-    // `Referer: ${referer}`,
-  ] + crlf
+    `Origin: ${origin}`,
+    `Referer: ${referer}`,
+  ].join(crlf) + '$' + crlf
 
   const commandAgs = [
     '-headers', headers,
@@ -55,7 +55,7 @@ function record(stremUrl: string) {
     console.log('exit执行', `退出码: ${code}`, `信号: ${signal}`)
 
     if (signal == 'SIGKILL') {
-      const file = 'public/xiabingbao20240107.ts'
+      const file = 'public/xiabingbao20240107'
       const filePath = path.resolve(cwd, file) 
       console.log('执行了没有', filePath)
       // 此时转mp4
@@ -64,7 +64,7 @@ function record(stremUrl: string) {
           `ffmpeg`,
           // 省略文件有关ffmpeg本身的信息
           '-hide_banner',
-          `-i ${filePath}.flv`,
+          `-i ${filePath + '.ts'}`,
           '-c copy',
           `${file}.mp4`
         ].join(' ')
