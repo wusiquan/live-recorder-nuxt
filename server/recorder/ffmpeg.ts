@@ -15,7 +15,7 @@ const { origin, referer } = runtimeConfig.bilibili.headers
 function record(stremUrl: string) {
   const ffmpegPath = getFfmpegPath()
 
-  const crlf = "\r\n"
+  const crlf = "'\r\n'"
   const headers = [
     `User-Agent: ${userAgent}`,
     `Origin: ${origin}`,
