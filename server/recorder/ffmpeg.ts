@@ -53,24 +53,24 @@ function record(stremUrl: string) {
 
   ffmpegProc.on('exit', (code, signal) => {
     console.log('exit执行', `退出码: ${code}`, `信号: ${signal}`)
+  })
 
-    if (signal == 'SIGKILL') {
-      const file = 'public/xiabingbao20240107'
-      const filePath = path.resolve(cwd, file + '.flv') 
-      console.log('执行了没有', filePath)
-      // 此时转mp4
-      if (fs.statSync(filePath)) {
-        const commandStr = [
-          `ffmpeg`,
-          // 省略文件有关ffmpeg本身的信息
-          '-hide_banner',
-          `-i ${filePath}`,
-          '-c copy',
-          `${file}.mp4`
-        ].join(' ')
-  
-        childProcess.exec(commandStr)
-      }
+  ffmpegProc.on('SIGINT', () => {
+    const file = 'public/xiabingbao20240107'
+    const filePath = path.resolve(cwd, file + '.flv') 
+    console.log('执行了没有', filePath)
+    // 此时转mp4
+    if (fs.statSync(filePath)) {
+      const commandStr = [
+        `ffmpeg`,
+        // 省略文件有关ffmpeg本身的信息
+        '-hide_banner',
+        `-i ${filePath}`,
+        '-c copy',
+        `${file}.mp4`
+      ].join(' ')
+
+      childProcess.exec(commandStr)
     }
   })
     
