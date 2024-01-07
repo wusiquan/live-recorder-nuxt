@@ -56,7 +56,7 @@ function record(stremUrl: string) {
 
     if (signal == 'SIGKILL') {
       const file = 'public/xiabingbao20240107'
-      const filePath = path.resolve(cwd, file) 
+      const filePath = path.resolve(cwd, file + '.ts') 
       console.log('执行了没有', filePath)
       // 此时转mp4
       if (fs.statSync(filePath)) {
@@ -64,7 +64,7 @@ function record(stremUrl: string) {
           `ffmpeg`,
           // 省略文件有关ffmpeg本身的信息
           '-hide_banner',
-          `-i ${filePath + '.ts'}`,
+          `-i ${filePath}`,
           '-c copy',
           `${file}.mp4`
         ].join(' ')
