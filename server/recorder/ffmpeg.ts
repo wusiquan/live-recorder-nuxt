@@ -55,7 +55,9 @@ function record(stremUrl: string) {
     console.log('exit执行', `退出码: ${code}`, `信号: ${signal}`)
   })
 
-  ffmpegProc.on('SIGINT', () => {
+  process.on('SIGINT', () => {
+    ffmpegProc.stdin?.write('q')
+
     const file = 'public/xiabingbao20240107'
     const filePath = path.resolve(cwd, file + '.flv') 
     console.log('执行了没有', filePath)
