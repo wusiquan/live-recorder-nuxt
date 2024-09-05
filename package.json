@@ -11,14 +11,19 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.9.1",
-    "unplugin-auto-import": "^0.17.3",
-    "unplugin-vue-components": "^0.26.0",
-    "vue": "^3.4.5",
-    "vue-router": "^4.2.5"
+    "nuxt": "^3.13.1",
+    "unplugin-auto-import": "^0.18.2",
+    "unplugin-vue-components": "^0.27.4",
+    "vue": "^3.5.1",
+    "vue-router": "^4.4.3"
   },
   "dependencies": {
-    "@css-render/vue3-ssr": "^0.15.12",
-    "naive-ui": "^2.36.0"
+    "@css-render/vue3-ssr": "^0.15.14",
+    "naive-ui": "^2.39.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@nuxt/kit": "^3.13.1"
+    }
   }
 }

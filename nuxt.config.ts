@@ -85,5 +85,7 @@ export default defineNuxtConfig({
     //       ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone']
     //       : []
     // }
-  }
+  },
+
+  compatibilityDate: '2024-09-05'
 })
