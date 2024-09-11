@@ -5,6 +5,8 @@ ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable pnpm
 
+RUN npm config set registry https://registry.npmmirror.com
+
 COPY . /app
 
 WORKDIR /app
