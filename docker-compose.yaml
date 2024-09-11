@@ -1,0 +1,8 @@
+services:
+  molicangcang-nuxt:
+    container_name: molicangcang-nuxt
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    restart: always
